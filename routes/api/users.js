@@ -10,7 +10,7 @@ const {
 // /api/users
 router.route("/").get(getUsers).post(createUser);
 
-// /api/courses/:userId
+// /api/users/:userId
 router.route("/:userId").get(getUserId).put(updateUser).delete(deleteUser);
 
 module.exports = router;

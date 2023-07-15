@@ -1,10 +1,27 @@
+const router = require("express").Router();
+
 // Get all thoughts
+router.get("/thoughts", thoughtController.getThoughts);
 
 // Get single thought by ID
+router.get("/thoughts/:thoughtId", thoughtController.getSingleThought);
 
-// Post - Create new thought (don't forget to push the created thought's _id
-//to the associated user's thoughts array field)
+// Create new thought
+router.post("/thoughts", thoughtController.newThought);
 
-// Put to update a thought by its id
+// Update a thought by its ID
+router.put("/thoughts/:thoughtId", thoughtController.updateThought);
 
-// Delete to remove a thought by ID
+// Remove a thought by its ID
+router.delete("/thoughts/:thoughtId", thoughtController.removeThought);
+
+// Create a reaction stored in a single thought's reactions array
+router.post("/thoughts/:thoughtId/reactions", thoughtController.createReaction);
+
+// Remove a reaction by the reaction's reactionId value
+router.delete(
+  "/thoughts/:thoughtId/reactions/:reactionId",
+  thoughtController.removeReaction
+);
+
+module.exports = router;
