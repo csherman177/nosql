@@ -58,11 +58,11 @@ module.exports = {
   // Delete to remove user by ID
   async deleteUser(req, res) {
     try {
-      const removeUser = await User.findOneAndDelete({
+      const deleteUser = await User.findOneAndDelete({
         _id: req.params.userId,
       });
 
-      if (!removeUser) {
+      if (!deleteUser) {
         return res.status(404).json({ message: "No user with that ID" });
       }
     } catch (err) {
