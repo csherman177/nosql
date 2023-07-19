@@ -26,7 +26,11 @@ SO THAT my website can handle large amounts of unstructured data
 
 ## Project URL
 
+https://github.com/csherman177/nosql
+
 ## Deployment
+
+https://csherman177.github.io/nosql/
 
 ## Contact
 
