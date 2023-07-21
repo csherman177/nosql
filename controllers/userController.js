@@ -68,54 +68,63 @@ module.exports = {
     } catch (err) {
       res.status(500).json(err);
     }
-  },
+    //   await Thought.deleteMany({ _id: { $in: user.thoughts } });
 
-  // Post new friend to a user's friend list
-  async addFriend(req, res) {
-    try {
-      const { userId, friendId } = req.body;
-      const user = await User.findById(userId);
-      if (!user) {
-        return res.status(404).json({ message: "No user with that ID" });
-      }
+    //   // Delete the user
+    //   await User.findByIdAndDelete(userId);
 
-      const friend = await User.findById(friendId);
-      if (!friend) {
-        return res.status(404).json({ message: "No friend with that ID" });
-      }
-
-      user.friends.push(friendId);
-      await user.save();
-
-      res.status(200).json({ message: "Friend added successfully" });
-    } catch (err) {
-      console.log(err);
-      return res.status(500).json(err);
-    }
-  },
-  // Delete friend from friend list
-  async removeFriend(req, res) {
-    try {
-      const { userId, friendId } = req.body;
-      const user = await User.findById(userId);
-      if (!user) {
-        return res.status(404).json({ message: "No user with that ID" });
-      }
-
-      const friendIndex = user.friends.indexOf(friendId);
-      if (friendIndex === -1) {
-        return res
-          .status(404)
-          .json({ message: "No friend with that ID in the friend list" });
-      }
-
-      user.friends.splice(friendIndex, 1);
-      await user.save();
-
-      res.status(200).json({ message: "Friend removed successfully" });
-    } catch (err) {
-      console.log(err);
-      return res.status(500).json(err);
-    }
+    //   res.status(200).json({ message: 'User deleted successfully' });
+    // } catch (error) {
+    //   console.error(error);
+    //   res.status(500).json({ error: 'An error occurred while deleting the user' });
   },
 };
+
+// // Post new friend to a user's friend list
+// async addFriend(req, res) {
+//   try {
+//     const { userId, friendId } = req.body;
+//     const user = await User.findById(userId);
+//     if (!user) {
+//       return res.status(404).json({ message: "No user with that ID" });
+//     }
+
+//     const friend = await User.findById(friendId);
+//     if (!friend) {
+//       return res.status(404).json({ message: "No friend with that ID" });
+//     }
+
+//     user.friends.push(friendId);
+//     await user.save();
+
+//     res.status(200).json({ message: "Friend added successfully" });
+//   } catch (err) {
+//     console.log(err);
+//     return res.status(500).json(err);
+//   }
+// },
+// // Delete friend from friend list
+// async removeFriend(req, res) {
+//   try {
+//     const { userId, friendId } = req.body;
+//     const user = await User.findById(userId);
+//     if (!user) {
+//       return res.status(404).json({ message: "No user with that ID" });
+//     }
+
+//     const friendIndex = user.friends.indexOf(friendId);
+//     if (friendIndex === -1) {
+//       return res
+//         .status(404)
+//         .json({ message: "No friend with that ID in the friend list" });
+//     }
+
+//     user.friends.splice(friendIndex, 1);
+//     await user.save();
+
+//     res.status(200).json({ message: "Friend removed successfully" });
+//   } catch (err) {
+//     console.log(err);
+//     return res.status(500).json(err);
+//   }
+// },

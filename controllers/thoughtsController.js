@@ -79,66 +79,6 @@ module.exports = {
       console.error(error);
       return res.status(500).json({ error: "Server error" });
     }
-
-    // Post create a reaction stored in a single thought's reactions array
-    const createReaction = async (req, res) => {
-      try {
-        const { thoughtId } = req.params;
-        const { reactionBody, username } = req.body;
-        const thought = await Thought.findById(thoughtId);
-
-        if (!thought) {
-          return res.status(404).json({ error: "Thought not found" });
-        }
-
-        const newReaction = {
-          reactionBody,
-          username,
-        };
-
-        thought.reactions.push(newReaction);
-        await thought.save();
-
-        return res.status(201).json(thought.reactions);
-      } catch (error) {
-        console.error(error);
-        return res.status(500).json({ error: "Server error" });
-      }
-    };
-
-    // Delete to pull and remove a reaction by the reaction's reactionId value
-    // Thought ID & Reaction ID
-    const removeReaction = async (req, res) => {
-      try {
-        const { thoughtId } = req.params;
-        const { reactionBody, username } = req.body;
-        const thought = await Thought.findById(thoughtId);
-
-        if (!thought) {
-          return res.status(404).json({ message: "No thought with that ID" });
-        }
-        // Find the index of the reaction with the given reactionId
-        const reactionIndex = thought.reactions.findIndex(
-          (reaction) => reaction.reactionId === reactionId
-        );
-
-        if (reactionIndex === -1) {
-          return res.status(404).json({ error: "Reaction not found" });
-        }
-
-        // Remove the reaction from the reactions array
-        thought.reactions.splice(reactionIndex, 1);
-
-        await thought.save();
-
-        return res
-          .status(200)
-          .json({ message: "Reaction removed successfully" });
-      } catch (error) {
-        console.error(error);
-        return res.status(500).json({ error: "Server error" });
-      }
-    };
   },
 
   // Create a Reaction - Left off here
